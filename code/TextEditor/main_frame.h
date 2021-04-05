@@ -20,8 +20,4 @@ public:
 private:
 	MenuBar menu_bar;
 	TextArea text_area;
-
-public:
-	void Load(Engine& engine, TextAeraData data) { text_area.Load(engine, data); }
-	const TextAeraData Save(Engine& engine) { return text_area.Save(engine); }
 };
