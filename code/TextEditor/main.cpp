@@ -1,4 +1,5 @@
 #include "main_frame.h"
+#include "WndDesign/widget/MessageBox.h"
 
 
 #pragma comment(lib, "WndDesign.lib")
@@ -10,26 +11,38 @@ private:
 	static constexpr wchar file_name[] = L"text.editor";
 
 public:
-	GlobalManager() { Load(); }
-	~GlobalManager() { Save(); }
-
-private:
-	MainFrame main_frame;
-
-public:
-	void Run() {
+	GlobalManager() { 
 		desktop.AddChild(main_frame);
+		Load(); 
 		desktop.MessageLoop();
 	}
+	~GlobalManager() { 
+		Save(); 
+	}
+
+private:
+	unique_ptr<Engine> engine;
+	MainFrame main_frame;
 
 private:
 	void Load() {
-		unique_ptr<Engine> engine = Engine::Create(file_name);
-		TextAeraData data = engine->GetMetadata<TextAeraData>();
-		main_frame.Load(*engine, data);
+		try {
+			engine = Engine::Create(file_name);
+		} catch (...) {
+			GetMessageBox().Alert(L"Open File Error", []() { desktop.Terminate(); });
+			return;
+		}
+		try {
+			TextAeraData data = engine->GetMetadata<TextAeraData>();
+			main_frame.Load(*engine, data);
+		} catch (...) {
+			engine->Format();
+			TextAeraData data;
+			main_frame.Load(*engine, data);  // index is invalid, so everything will be cleared
+		}
 	}
 	void Save() {
-		unique_ptr<Engine> engine = Engine::Create(file_name);
+		if (engine == nullptr) { return; }
 		engine->Format();
 		TextAeraData data = main_frame.Save(*engine);
 		engine->SetMetadata<TextAeraData>(data);
@@ -39,5 +52,4 @@ private:
 
 int main() {
 	GlobalManager global_manager;
-	global_manager.Run();
 }
