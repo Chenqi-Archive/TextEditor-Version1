@@ -9,4 +9,5 @@ int main() {
 	MainFrame main_frame;
 	desktop.AddChild(main_frame);
 	desktop.MessageLoop();
+	return 0;
 }
