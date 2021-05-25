@@ -1,5 +1,6 @@
 #pragma once
 
+#include "WndDesign/WndDesign.h"
 #include "WndDesign/wnd/OverlapLayout.h"
 #include "WndDesign/wnd/Button.h"
 #include "WndDesign/system/win32_aero_snap.h"

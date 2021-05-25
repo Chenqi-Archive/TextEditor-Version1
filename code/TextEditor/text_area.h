@@ -2,6 +2,7 @@
 
 #include "data_format.h"
 
+#include "WndDesign/WndDesign.h"
 #include "WndDesign/wnd/EditBox.h"
 #include "WndDesign/widget/MessageBox.h"
 
@@ -34,7 +35,7 @@ public:
 		}
 		try {
 			TextAeraData data = engine->GetMetadata<TextAeraData>();
-			auto [text, length] = Array<wchar>(*engine, data.index).Load();
+			auto [text, length] = engine->LoadArray(data.index);
 			SetText(wstring(text, length));
 		} catch (...) {
 			engine->Format();
@@ -45,7 +46,7 @@ public:
 		engine->Format();
 		TextAeraData data;
 		const wstring& text = GetText();
-		Array<wchar>(*engine, data.index).Save(text.data(), text.length());
+		engine->SaveArray(data.index, text.data(), text.length());
 		engine->SetMetadata<TextAeraData>(data);
 	}
 };
