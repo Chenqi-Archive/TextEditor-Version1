@@ -1,0 +1,26 @@
+13 paragraphs
+
+position 200 200
+width 300
+length 266
+#wchar[266]
+
+position 633 251
+width auto
+length 12
+wchar[12]
+
+400 300
+100
+469
+#wchar[469]
+
+
+/////////////////
+13
+200 200
+300
+266
+fawet 
+
+

@@ -1,0 +1,32 @@
+
+mainFrame {
+	width: 800px;
+	height: 500px;
+	sizable: true;
+	min-width: 200px;
+	min-height: 200px;
+	
+	menuBar: {
+		left: 0px;
+		top: 0px;
+		width: relative;
+		height: 50px;
+	
+		minimizeBtn: true;
+		maximizeBtn: true;
+		closeBtn: true;
+		title: "CogArch";
+	}
+	
+	clientRgn: {
+		left: 0px;
+		top: 50px;
+		width: relative;
+		height: 450px;
+	}
+}
+
+
+textBox {
+	
+}
